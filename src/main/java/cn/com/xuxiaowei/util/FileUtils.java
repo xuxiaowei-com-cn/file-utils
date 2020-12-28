@@ -15,10 +15,7 @@
  */
 package cn.com.xuxiaowei.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -102,7 +99,7 @@ public class FileUtils {
      * @return 返回 文件内容
      * @throws IOException 读取文件异常
      */
-    public static String readerFileText(File file) throws IOException {
+    public static String readText(File file) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         try (// 创建一个新FileReader，给定从中读取文件 。
              FileReader fileReader = new FileReader(file);
@@ -121,6 +118,40 @@ public class FileUtils {
             throw new IOException(e.getMessage());
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * 读取文件
+     *
+     * @param filePath 文件路径
+     * @return 返回 文件二进制编码
+     * @throws IOException 读取文件异常
+     */
+    public static byte[] readByte(String filePath) throws IOException {
+        return readByte(new File(filePath));
+    }
+
+    /**
+     * 读取文件
+     *
+     * @param file 文件
+     * @return 返回 文件二进制编码
+     * @throws IOException 读取文件异常
+     */
+    @SuppressWarnings("all")
+    public static byte[] readByte(File file) throws IOException {
+        long len = file.length();
+
+        byte[] bytes = new byte[(int) len];
+
+        try (FileInputStream in = new FileInputStream(file)) {
+            in.read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IOException(e.getMessage());
+        }
+
+        return bytes;
     }
 
 }
