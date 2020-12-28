@@ -100,7 +100,7 @@ public class FileUtils {
      * @param file 文件
      * @return 返回 文件内容
      */
-    public static String readerFile(File file) {
+    public static String readerFileText(File file) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             // 创建一个新FileReader，给定从中读取文件 。
