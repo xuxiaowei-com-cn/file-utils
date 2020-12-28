@@ -15,6 +15,9 @@
  */
 package cn.com.xuxiaowei.util;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.List;
 
@@ -152,6 +155,46 @@ public class FileUtils {
         }
 
         return bytes;
+    }
+
+    /**
+     * 响应图片
+     *
+     * @param response   响应
+     * @param bytes      图片二进制
+     * @param formatName 图片格式
+     * @throws IOException 响应异常
+     */
+    public static void writeImage(HttpServletResponse response, byte[] bytes, String formatName) throws IOException {
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        BufferedImage img = ImageIO.read(byteArrayInputStream);
+        ImageIO.write(img, formatName, response.getOutputStream());
+    }
+
+    /**
+     * 响应图片
+     *
+     * @param response   响应
+     * @param input      图片流
+     * @param formatName 图片格式
+     * @throws IOException 响应异常
+     */
+    public static void writeImage(HttpServletResponse response, InputStream input, String formatName) throws IOException {
+        BufferedImage img = ImageIO.read(input);
+        ImageIO.write(img, formatName, response.getOutputStream());
+    }
+
+    /**
+     * 响应图片
+     *
+     * @param response   响应
+     * @param file       图片文件
+     * @param formatName 图片格式
+     * @throws IOException 响应异常
+     */
+    public static void writeImage(HttpServletResponse response, File file, String formatName) throws IOException {
+        BufferedImage img = ImageIO.read(file);
+        ImageIO.write(img, formatName, response.getOutputStream());
     }
 
 }
