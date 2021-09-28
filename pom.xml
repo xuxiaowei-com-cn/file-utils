@@ -11,7 +11,7 @@
     <properties>
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
 
     </properties>
 
